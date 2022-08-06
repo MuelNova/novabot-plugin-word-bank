@@ -105,13 +105,13 @@ git clone https://github.com/Nova-Noir/novabot-plugin-word-bank.git
 打开 Nova-Bot 项目的 `bot.py` 文件, 在其中写入
 
 ```python
-nonebot.load_plugin('path.to.novabot.novabot-plugin-word-bank.novabot_plugin_word-bank')
+nonebot.load_plugin('path.to.novabot.novabot-plugin-word-bank.novabot_plugin_word_bank')
 ```
 
 > 在默认情况下，它应该是
 >
 > ```python
-> nonebot.load_plugin('novabot.plugins.novabot-plugin-word-bank.novabot_plugin_word-bank')
+> nonebot.load_plugin('novabot.plugins.novabot-plugin-word-bank.novabot_plugin_word_bank')
 > ```
 >
 > 
