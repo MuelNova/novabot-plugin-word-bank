@@ -10,7 +10,7 @@
 
 # novabot-plugin-word-bank
 
-_✨ NoneBot 插件简单描述 ✨_
+_✨ Word-Bank2,但是魔改了 ✨_
 
 <a href="./LICENSE">
     <img src="https://img.shields.io/github/license/Nova-Noir/novabot-plugin-word-bank.svg" alt="license">
@@ -108,8 +108,6 @@ git clone https://github.com/Nova-Noir/novabot-plugin-word-bank.git
 nonebot.load_plugin('path.to.novabot.novabot-plugin-word-bank.novabot_plugin_word-bank')
 ```
 
-</details>
-
 > 在默认情况下，它应该是
 >
 > ```python
@@ -117,6 +115,8 @@ nonebot.load_plugin('path.to.novabot.novabot-plugin-word-bank.novabot_plugin_wor
 > ```
 >
 > 
+
+</details>
 
 ## ⚙️ 配置
 
