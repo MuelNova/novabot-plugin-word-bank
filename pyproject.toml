@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "novabot_plugin_word_bank"
-version = "0.1.0"
+version = "0.1.1"
 description = "Nova-Bot 使用的无数据库的问答插件"
 authors = ["NovaNo1r <mail@novanoir.dev>"]
 
