@@ -19,8 +19,9 @@ from nonebot.matcher import Matcher
 from nonebot.params import CommandArg, RegexGroup
 from nonebot.permission import SUPERUSER
 from nonebot.typing import T_State, T_Handler
+from nonebot import on_regex, on_command, on_message
 
-from novabot import on_regex, on_command, on_message
+from novabot import Service
 from .data_source import word_bank as wb
 from .models import MatchType, IncludeCQCodeError
 from .util import to_json, parse_msg, save_and_convert_img
@@ -45,7 +46,7 @@ def wb_match_rule(event: MessageEvent, state: T_State) -> bool:
     return True
 
 
-wb_matcher = on_message("问答回复", wb_match_rule, priority=99)
+wb_matcher = on_message(wb_match_rule, priority=99)
 
 
 @wb_matcher.handle()
@@ -64,25 +65,22 @@ PERM_EDIT = GROUP_ADMIN | GROUP_OWNER | PRIVATE_FRIEND | SUPERUSER | GROUP_MEMBE
 PERM_GLOBAL = SUPERUSER
 
 wb_set_cmd = on_regex(
-    "设置问答",
     r"^((?:模糊|正则|@)*)\s*问\s*(\S+.*?)\s*答\s*(\S+.*?)\s*$",
     flags=re.S,
     block=True,
     priority=2,
     permission=PERM_EDIT,
-    invisible=True,
-    limit=10
 )
 
 wb_set_cmd_gl = on_regex(
-    "全局设置问答",
     r"^((?:全局|模糊|正则|@)*)\s*问\s*(\S+.*?)\s*答\s*(\S+.*?)\s*$",
     flags=re.S,
     block=True,
     priority=2,
     permission=PERM_GLOBAL,
-    invisible=True
 )
+
+Service(wb_set_cmd, limit=10, limit_prompt="你今天设太多啦!")
 
 
 @wb_set_cmd.handle()
@@ -125,7 +123,6 @@ async def wb_set(
 
 
 wb_del_cmd = on_regex(
-    "删除问答",
     r"^删除\s*((?:模糊|正则|@)*)\s*词条\s*(\S+.*?)\s*$",
     flags=re.S,
     block=True,
@@ -134,7 +131,6 @@ wb_del_cmd = on_regex(
 )
 
 wb_del_cmd_gl = on_regex(
-    "全局删除问答",
     r"^删除\s*((?:全局|模糊|正则|@)*)\s*词条\s*(\S+.*?)\s*$",
     flags=re.S,
     block=True,
@@ -227,22 +223,18 @@ async def _(matcher: Matcher, state: T_State):
 
 
 wb_search_cmd = on_regex(
-    "查询全部词库",
     r"^查询\s*((?:群|用户)*)\s*(\d*)\s*((?:全局)?(?:模糊|正则)?@?)\s*词库\s*(.*?)\s*$",
     flags=re.S,
     block=True,
     priority=2,
     permission=PERM_GLOBAL,
-    invisible=True
 )
 wb_search_cmd_user = on_regex(
-    "查询词库",
     r"^查询\s*((?:模糊|正则)?@?)\s*词库\s*(.*?)\s*$",
     flags=re.S,
     block=True,
     priority=2,
     permission=PERM_EDIT,
-    invisible=True
 )
 
 
